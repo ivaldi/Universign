@@ -88,6 +88,19 @@ module Universign
       end
     end
 
+    def check_box_texts=(data)
+      if !data.is_a?(Array)
+        raise 'SignatureFieldsMustBeAnArray'
+      end
+
+      @check_box_texts = data
+      params['checkBoxTexts'] = data.map do |d|
+        raise 'BadSignatureFieldType' unless d.instance_of?(String)
+
+        d
+      end
+    end
+
     # The meta data of the PDF document
     #
     # @return [Hash]

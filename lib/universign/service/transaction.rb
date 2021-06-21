@@ -12,7 +12,8 @@ module Universign
         profile:                    :profile,
         final_doc_sent:             :finalDocSent,
         final_doc_requester_sent:   :finalDocRequesterSent,
-        chaining_mode:              :chainingMode
+        chaining_mode:              :chainingMode,
+        must_contact_first_signer:  :mustContactFirstSigner
       }
 
       DEFAULT_OPTIONS = {
@@ -78,6 +79,7 @@ module Universign
 
           safeguard do
             result = @client.call("requester.requestTransaction", sign_options)
+
             Universign::Transaction.new(result['id'], result['url'])
           end
         end
